@@ -34,12 +34,8 @@ psql -h localhost -U postgres
 docker run --name test-mysql  -e MYSQL_ROOT_PASSWORD=anypass -e MYSQL_DATABASE=my_db -e MYSQL_ROOT_HOST='%' -v ~/mysql_db_vol:/var/lib/mysql -p 3306:3306 -d mysql/mysql-server:5.7
 sudo apt install mysql-client-core-8.0
 
-docker run \
-    --name local-mysql
-    -e MYSQL_ROOT_PASSWORD=anypass
-    -v ~/local-mysql-vol:/var/lib/mysql 
-    -p 3306:3306 
-    -d mysql/mysql-server:5.7
+# in macos
+docker run --name local-mysql -e MYSQL_ROOT_PASSWORD=anypass -v ~/local-mysql-vol:/var/lib/mysql -p 3306:3306 -d mysql/mysql-server:5.7
 
 
 # opening mysql from terminal
