@@ -39,3 +39,8 @@ select * from album;
 exit
 ```
 
+Get the container IP to be able to connect
+```bash
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' local-mysql
+```
+
