@@ -1,1 +1,10 @@
 go 1.20
+
+use (
+	./tutorials/01-getting-started/hello
+	./tutorials/02-fundamentals/greetings
+	./tutorials/02-fundamentals/hello
+	./tutorials/03-workspaces/example
+	./tutorials/03-workspaces/hello
+	./tutorials/04-database-access/data-access
+)
