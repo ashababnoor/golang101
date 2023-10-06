@@ -22,7 +22,6 @@ func main() {
 	// get a dabase handle
 	var err error
 	db, err = sql.Open("mysql", cfg.FormatDSN())
-	// db, err := sql.Open("mysql", "root:anypass@tcp(172.17.0.2:3306)/recordings")
 	if err != nil {
 		log.Fatal(err)
 	}
