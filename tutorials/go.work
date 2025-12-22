@@ -1,0 +1,9 @@
+go 1.20
+
+use (
+	./01-getting-started/hello
+	./02-fundamentals/greetings
+	./02-fundamentals/hello
+	./03-workspaces/hello
+	./04-database-access/data-access
+)
