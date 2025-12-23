@@ -1,16 +1,19 @@
 package main
 
 import (
-	"gorm-playground/db"
-	"gorm-playground/models"
-	"gorm-playground/handlers"
 	"github.com/gin-gonic/gin"
+	"gorm-playground/db"
+	"gorm-playground/handlers"
+	"gorm-playground/models"
 )
 
 func main() {
 	db.Connect()
 
-	db.DB.AutoMigrate(&models.User{})
+	db.DB.AutoMigrate(
+		&models.User{},
+		&models.AuditLog{},
+	)
 
 	r := gin.Default()
 
@@ -19,6 +22,7 @@ func main() {
 	r.GET("/users/:id", handlers.GetUser)
 	r.PUT("/users/:id", handlers.UpdateUser)
 	r.DELETE("/users/:id", handlers.DeleteUser)
+	r.POST("/users/tx", handlers.CreateUserWithAudit)
 
 	r.Run(":8080")
 }
