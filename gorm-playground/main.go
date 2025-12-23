@@ -1,40 +1,24 @@
 package main
 
 import (
-	"log"
-
 	"gorm-playground/db"
 	"gorm-playground/models"
+	"gorm-playground/handlers"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// connect DB
 	db.Connect()
 
-	// migrate schema
-	err := db.DB.AutoMigrate(&models.User{})
-	if err != nil {
-		log.Fatal(err)
-	}
+	db.DB.AutoMigrate(&models.User{})
 
-	// CREATE
-	user := models.User{
-		Name:  "Shabab",
-		Email: "shabab@example.com",
-		Age:   26,
-	}
+	r := gin.Default()
 
-	db.DB.Create(&user)
-	log.Println("user created with ID:", user.ID)
+	r.POST("/users", handlers.CreateUser)
+	r.GET("/users", handlers.GetUsers)
+	r.GET("/users/:id", handlers.GetUser)
+	r.PUT("/users/:id", handlers.UpdateUser)
+	r.DELETE("/users/:id", handlers.DeleteUser)
 
-	// READ
-	var fetched models.User
-	db.DB.First(&fetched, "email = ?", "shabab@example.com")
-	log.Println("fetched user:", fetched)
-
-	// UPDATE
-	db.DB.Model(&fetched).Update("Age", 27)
-
-	// DELETE (soft delete)
-	// db.DB.Delete(&fetched)
+	r.Run(":8080")
 }
